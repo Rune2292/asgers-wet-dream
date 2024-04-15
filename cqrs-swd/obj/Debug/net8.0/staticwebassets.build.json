@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Yl1gMALjYmweVlatOReHzRfSL85B2lfKDC7eZ1KSa5Q=",
+  "Source": "cqrs-swd",
+  "BasePath": "_content/cqrs-swd",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
