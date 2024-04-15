@@ -1,7 +1,7 @@
 
 using System.Text.Json;
 using Handler;
-using Commmand;
+using Cmd;
 using Microsoft.AspNetCore.Mvc;
 
 

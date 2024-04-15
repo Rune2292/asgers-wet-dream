@@ -1,0 +1,11 @@
+
+
+namespace Event
+{
+    public class DepositEventHandle{
+        public void OnDepositEvent(object sender, DepositEventArgs e)
+        {
+            Console.WriteLine($"Deposit of {e.Amount} to account {e.AccountNumber} at {e.EventTime}");
+        }
+
+}

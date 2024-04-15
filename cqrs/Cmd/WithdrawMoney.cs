@@ -1,11 +1,12 @@
 
 
-namespace Commmand
+namespace Cmd
 {
-    public class DepositMoney
+    public class WithdrawMoney
     {
         public int Amount { get; set; }
         public string AccountNumber { get; set; }
+        
         public void Validate()
         {
             if (Amount <= 0)
@@ -18,4 +19,6 @@ namespace Commmand
             }
         }
     }
+
+
 }
