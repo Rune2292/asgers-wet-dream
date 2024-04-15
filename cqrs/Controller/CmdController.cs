@@ -1,23 +1,39 @@
 
-using cqrs.Handler;
+using System.Text.Json;
+using Handler;
+using Commmand;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace Controller
 {
-    [Route("v1/call")]
+    [Route("v1/[controller]/deposit")]
     [ApiController]
-
     public class CmdController : ControllerBase
     {
-        [HttpPost] 
-        public async Task<IActionResult> DispatchCommand([FromBody] object command)
-        {            
-            //Dispatch command to the command handler
-            
-            return Ok();
+        private readonly CommandHandler _commandHandler;
+
+        public CmdController(CommandHandler commandHandler)
+        {
+            _commandHandler = commandHandler;
         }
 
+        [HttpPost] 
+        public async Task<IActionResult> DepositMoneyBogo([FromBody] DepositMoney command)
+        {  
+            try
+            {
+                await _commandHandler.HandleDeposit(command);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        
+    }
 }
 
     
