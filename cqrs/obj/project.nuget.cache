@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iWMvInKhLkAm+kOIGxwZS+V24nvUK8ZUtlJTYAKHn+wizdd80+/Ynn4LgvMr0bgCL2bKEXip0VL4juUaBeBPPw==",
+  "dgSpecHash": "Enp20KCNQJAlclbIEmMuMLpsrNFiiRA3sqYEPM/4pN0e8aJouakiqnF7QksYkz/bDutXQRD3JjzbMqQRDXK2Hw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs-swd\\cqrs-swd.csproj",
+  "projectFilePath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs\\cqrs.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Runeg\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.2\\microsoft.aspnetcore.openapi.8.0.2.nupkg.sha512",
     "C:\\Users\\Runeg\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs-swd\\cqrs-swd.csproj": {}
+    "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs\\cqrs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs-swd\\cqrs-swd.csproj": {
+    "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs\\cqrs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs-swd\\cqrs-swd.csproj",
-        "projectName": "cqrs-swd",
-        "projectPath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs-swd\\cqrs-swd.csproj",
+        "projectUniqueName": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs\\cqrs.csproj",
+        "projectName": "cqrs",
+        "projectPath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs\\cqrs.csproj",
         "packagesPath": "C:\\Users\\Runeg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs-swd\\obj\\",
+        "outputPath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\cqrs\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
