@@ -1,6 +1,6 @@
-@cqrs_HostAddress = http://localhost:5196
+@Cqrs_HostAddress = http://localhost:5122
 
-GET {{cqrs_HostAddress}}/weatherforecast/
+GET {{Cqrs_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
