@@ -1,6 +1,8 @@
 using Handler;
 using Event;
+using ReadModel;
 using Repository;
+using Consumer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +12,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 // Register your dependencies
-builder.Services.AddScoped<CommandHandler>();  
-builder.Services.AddSingleton<EventStore>();    
-builder.Services.AddScoped<AccountRepository>(); 
+builder.Services.AddScoped<CommandHandler>();
+builder.Services.AddSingleton<EventStore>();
+builder.Services.AddScoped<AccountRepository>();
+builder.Services.AddSingleton<OverviewModel>();
+builder.Services.AddSingleton<OverviewConsumer>();
 
 var app = builder.Build();
 
@@ -23,7 +27,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Map controllers
+app.UseRouting();
+
+// Subscribe the consumer to the event store
+var eventStore = app.Services.GetRequiredService<EventStore>();
+var consumer = app.Services.GetRequiredService<OverviewConsumer>();
+eventStore.Subscribe(consumer.ConsumeEvent); 
+
 app.MapControllers();
 
 app.Run();

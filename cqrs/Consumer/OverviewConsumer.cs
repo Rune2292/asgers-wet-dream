@@ -1,65 +1,71 @@
 using Event;
 using ReadModel;
 
-namespace Consumer;
-
-
-
-public class OverviewConsumer
+namespace Consumer
 {
-    private OverviewModel _overviewModel;
-    public OverviewConsumer(OverviewModel overviewModel){
-        _overviewModel = overviewModel;
-    }
-    public void ConsumeEvent(IEvent evt)
+    public class OverviewConsumer
     {
-        switch (evt.GetEventType())
+        private OverviewModel _overviewModel;
+
+        public OverviewConsumer(OverviewModel overviewModel)
         {
-            case "MoneyDeposited":
-                var MoneyDepositedEvent = (Event<MoneyDepositedEventData>) evt;
-                MoneyDeposited(MoneyDepositedEvent.Data);
-                //Do something with the data
-                break;
-            case "MoneyWithdrawn":
-                var MoneyWithdrawnEvent = (Event<MoneyWithdrawnEventData>) evt;
-                MoneyWithdrawn(MoneyWithdrawnEvent.Data);
-                //Do something with the data
-                break;
-            default:
-                break;
+            _overviewModel = overviewModel;
         }
-    }
-    
-    public void PrintBalance(string accountNumber)
-    {
-        if (_overviewModel.GetBalance(accountNumber) == -1)
+
+        // Adjusted to match EventHandler<IEvent>
+        public void ConsumeEvent(object sender, IEvent evt)
         {
-            Console.WriteLine("Account not found");
-            return;
+            switch (evt.GetEventType())
+            {
+                case "MoneyDeposited":
+                    var MoneyDepositedEvent = (Event<MoneyDepositedEventData>)evt;
+                    MoneyDeposited(MoneyDepositedEvent.Data);
+                    break;
+                case "MoneyWithdrawn":
+                    var MoneyWithdrawnEvent = (Event<MoneyWithdrawnEventData>)evt;
+                    MoneyWithdrawn(MoneyWithdrawnEvent.Data);
+                    break;
+                default:
+                    break;
+            }
         }
-        Console.WriteLine("Account " + accountNumber + " Has " + _overviewModel.GetBalance(accountNumber) + "$");
-    }
 
-    public void MoneyDeposited(MoneyDepositedEventData data)
-    {
-        try {
-            _overviewModel.ChangeBalance(data.AccountNumber, data.Amount);
-            Console.WriteLine("Deposited " + data.Amount + "$ to account " + data.AccountNumber);
-            PrintBalance(data.AccountNumber);
-        } catch (System.Exception e) {
-            Console.WriteLine(e);
+        public void PrintBalance(string accountNumber)
+        {
+            if (_overviewModel.GetBalance(accountNumber) == -1)
+            {
+                Console.WriteLine("Account not found");
+                return;
+            }
+            Console.WriteLine("Account " + accountNumber + " Has " + _overviewModel.GetBalance(accountNumber) + "$");
+        }
+
+        private void MoneyDeposited(MoneyDepositedEventData data)
+        {
+            try
+            {
+                _overviewModel.ChangeBalance(data.AccountNumber, data.Amount);
+                Console.WriteLine("Deposited " + data.Amount + "$ to account " + data.AccountNumber);
+                PrintBalance(data.AccountNumber);
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private void MoneyWithdrawn(MoneyWithdrawnEventData data)
+        {
+            try
+            {
+                _overviewModel.ChangeBalance(data.AccountNumber, -data.Amount);
+                Console.WriteLine("Withdrawn " + data.Amount + "$ from account " + data.AccountNumber);
+                PrintBalance(data.AccountNumber);
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
-
-    public void MoneyWithdrawn(MoneyWithdrawnEventData data)
-    {
-        try {
-            _overviewModel.ChangeBalance(data.AccountNumber, -data.Amount);
-            Console.WriteLine("Withdrawn " + data.Amount + "$ from account " + data.AccountNumber);
-            PrintBalance(data.AccountNumber);
-        } catch (System.Exception e) {
-            Console.WriteLine(e);
-        }
-    }
-
 }
