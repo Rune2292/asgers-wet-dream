@@ -19,7 +19,7 @@ if (app.Environment.IsDevelopment())
 
 OverviewModel localOverviewDatabase = new OverviewModel();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.Run();
 
