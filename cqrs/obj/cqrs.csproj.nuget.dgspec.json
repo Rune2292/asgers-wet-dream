@@ -1,32 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\Cqrs\\Cqrs.csproj": {}
+    "/Users/martinvad/uni/sd/asgers-wet-dream/cqrs/cqrs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\Cqrs\\Cqrs.csproj": {
+    "/Users/martinvad/uni/sd/asgers-wet-dream/cqrs/cqrs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\Cqrs\\Cqrs.csproj",
-        "projectName": "Cqrs",
-        "projectPath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\Cqrs\\Cqrs.csproj",
-        "packagesPath": "C:\\Users\\Runeg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\SWD\\Cqrs\\obj\\",
+        "projectUniqueName": "/Users/martinvad/uni/sd/asgers-wet-dream/cqrs/cqrs.csproj",
+        "projectName": "cqrs",
+        "projectPath": "/Users/martinvad/uni/sd/asgers-wet-dream/cqrs/cqrs.csproj",
+        "packagesPath": "/Users/martinvad/.nuget/packages/",
+        "outputPath": "/Users/martinvad/uni/sd/asgers-wet-dream/cqrs/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Runeg\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/martinvad/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,11 +33,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -78,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
