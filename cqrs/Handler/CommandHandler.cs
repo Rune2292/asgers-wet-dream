@@ -9,24 +9,43 @@ namespace Handler
     public class CommandHandler
     {       
 
-        private readonly CommandPublisher _commandPublisher;
+        private readonly EventStore _eventPublisher;
 
-        public CommandHandler(CommandPublisher commandPublisher)
+        public CommandHandler(EventStore eventPublisher)
         {
-            _commandPublisher = commandPublisher;
+            _eventPublisher = eventPublisher;
         }   
-        public async Task HandleDeposit(DepositMoney command)
+        public void HandleDeposit(DepositMoney command)
         {
             //Validate the depositMoney is legal
             command.Validate();
 
             //Simulate doing the deposit
-            //OMG i changing the database!
+            //OMG im changing the database!
 
-            CommandEvent commandEvent = new CommandEvent(typeof(DepositMoney), command);
+            //Publish the event
+            var evtData = new MoneyDepositedEventData(command.Amount, command.AccountNumber);
+            IEvent evt = new Event<MoneyDepositedEventData>("MoneyDeposited", evtData);
 
-            //Create a event to be published
-            _commandPublisher.PublishEvent(commandEvent);            
+            _eventPublisher.PublishEvent(evt);
+        
+        }
+
+
+        public void HandleWithdraw(WithdrawMoney command)
+        {
+            //Validate the WithdrawMoney is legal
+            command.Validate();
+
+            //Simulate doing the deposit
+            //OMG im changing the database!
+
+            //Publish the event
+            var evtData = new MoneyWithdrawnEventData(command.Amount, command.AccountNumber);
+            IEvent evt = new Event<MoneyWithdrawnEventData>("MoneyWithdrawn", evtData);
+
+            _eventPublisher.PublishEvent(evt);
+
         }
     }
 }

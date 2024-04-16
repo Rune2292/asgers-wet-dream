@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Controller
 {
-    [Route("v1/[controller]/deposit")]
+    [Route("v1/[controller]")]
     [ApiController]
     public class CmdController : ControllerBase
     {
@@ -18,12 +18,12 @@ namespace Controller
             _commandHandler = commandHandler;
         }
 
-        [HttpPost] 
-        public async Task<IActionResult> DepositMoneyBogo([FromBody] DepositMoney command)
-        {  
+        [HttpPost("withdraw")]
+        public IActionResult DepositMoneyEndpoint([FromBody] DepositMoney command)
+        {
             try
             {
-                await _commandHandler.HandleDeposit(command);
+                _commandHandler.HandleDeposit(command);
                 return Ok();
             }
             catch (Exception e)
@@ -32,7 +32,21 @@ namespace Controller
             }
         }
 
-        
+        [HttpPost("deposit")]
+        public IActionResult WithdrawMoneyEndpoint([FromBody] WithdrawMoney command)
+        {
+            try
+            {
+                _commandHandler.HandleWithdraw(command);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
     }
 }
 
