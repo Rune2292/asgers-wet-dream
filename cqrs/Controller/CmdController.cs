@@ -46,6 +46,20 @@ namespace Controller
             }
         }
 
+        [HttpPost("openaccount")]
+        public IActionResult OpenAccountEndpoint()
+        {
+            try
+            {
+                _commandHandler.HandleOpenAccount();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
     }
 }
