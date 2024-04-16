@@ -2,6 +2,7 @@ using Controller;
 using Cmd;
 using Event;
 using System.Security.Cryptography;
+using Repository;
 
 
 namespace Handler;
@@ -11,10 +12,14 @@ public class CommandHandler
 
     private readonly EventStore _eventPublisher;
 
-    public CommandHandler(EventStore eventPublisher)
+    private readonly AccountRepository _accountRepository;
+
+    public CommandHandler(EventStore eventPublisher, AccountRepository accountRepository)
     {
         _eventPublisher = eventPublisher;
+        _accountRepository = accountRepository;
     }
+
     public void HandleDeposit(DepositMoney command)
     {
         //Validate the depositMoney is legal
@@ -37,10 +42,13 @@ public class CommandHandler
         //Validate the WithdrawMoney is legal
         command.Validate();
 
-        //Simulate doing the deposit
-        //OMG im changing the database!
-
-
+        //Check if there is enough balance on the account to withdraw
+        int balance = _accountRepository.CheckBalanceOnAccount(command.AccountNumber);
+        //Check if enough balance
+        if (balance < command.Amount)
+        {
+            throw new System.Exception("Not enough balance to withdraw");
+        }
 
         //Publish the event
         var evtData = new MoneyWithdrawnEventData(command.Amount, command.AccountNumber);
@@ -52,28 +60,13 @@ public class CommandHandler
 
     public void HandleOpenAccount()
     {
-        List<IEvent> eventStore = _eventPublisher.GetEventStoreList();
-
-        string randomAccountNumber = GenerateAccountNumber();
-
-        for (int i = 0; i < eventStore.Count; i++)
+        string randomAccountNumber;
+        //Check if the account already exists
+        do 
         {
-            if (eventStore[i].GetEventType() != "AccountOpened")
-                continue;
+            randomAccountNumber = _accountRepository.GenerateAccountNumber();
 
-            string accountNumber = ((Event<AccountOpenedEventData>)eventStore[i]).Data.AccountNumber;
-
-            if (accountNumber != randomAccountNumber)
-                continue;
-
-            randomAccountNumber = GenerateAccountNumber();
-            i = 0;
-
-        }
-
-
-        //Simulate doing the deposit
-        //OMG im changing the database!
+        } while (_accountRepository.IfAccountExists(randomAccountNumber));
 
         //Publish the event
         var evtData = new AccountOpenedEventData(randomAccountNumber);
@@ -81,20 +74,5 @@ public class CommandHandler
 
         _eventPublisher.PublishEvent(evt);
 
-    }
-
-
-    private string GenerateAccountNumber()
-    {
-        string randomAccountNumber = string.Empty;
-        var random = new Random();
-        randomAccountNumber += random.Next(1, 10).ToString(); // First digit should not be 0
-
-        for (int j = 0; j < 8; j++) //Generate the next 9 digits
-        {
-            randomAccountNumber += random.Next(0, 10).ToString();
-        }
-
-        return randomAccountNumber;
     }
 }

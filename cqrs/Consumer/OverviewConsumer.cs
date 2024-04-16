@@ -13,7 +13,6 @@ public class OverviewConsumer
     }
     public void ConsumeEvent(IEvent evt)
     {
-
         switch (evt.GetEventType())
         {
             case "MoneyDeposited":
@@ -61,7 +60,6 @@ public class OverviewConsumer
         } catch (System.Exception e) {
             Console.WriteLine(e);
         }
-        //Do something with the data
     }
 
 }
