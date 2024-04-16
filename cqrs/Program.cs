@@ -10,9 +10,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 // Register your dependencies
-builder.Services.AddScoped<CommandHandler>();  // Adjust the lifetime based on your application's needs (Scoped, Singleton, Transient)
-builder.Services.AddSingleton<EventStore>();    // Assuming EventStore can be a singleton
-builder.Services.AddScoped<AccountRepository>(); // Assuming AccountRepository should be scoped per request
+builder.Services.AddScoped<CommandHandler>();  
+builder.Services.AddSingleton<EventStore>();    
+builder.Services.AddScoped<AccountRepository>(); 
 
 var app = builder.Build();
 
