@@ -38,20 +38,17 @@ namespace ReadModel
         }
 
 
-        /*
-                public List<(int, DateTime)> GetHistory(string accountNumber)
-                {
-                    if (!_history.ContainsKey(accountNumber))
-                    {
-                        return new List<(int, DateTime)>();
-                    }
 
-                    return _history[accountNumber];
-                }*/
+        public List<Transaction> GetHistory(string accountNumber)
+        {
+            if (!_history.ContainsKey(accountNumber))
+            {
+                return new List<Transaction>();
+            }
+
+            return _history[accountNumber];
+
+        }
+
     }
-
-
-
-
-
 }
