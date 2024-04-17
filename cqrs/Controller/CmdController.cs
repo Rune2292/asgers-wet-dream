@@ -29,7 +29,7 @@ public class CmdController : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest(new ErrorMessageDto {ErrorMessage = e.Message });
+            return BadRequest(new ErrorMessageDto {Error = e.Message });
         }
     }
 
@@ -43,7 +43,7 @@ public class CmdController : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest(new ErrorMessageDto {ErrorMessage = e.Message });
+            return BadRequest(new ErrorMessageDto {Error = e.Message });
         }
     }
 

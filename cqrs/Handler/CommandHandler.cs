@@ -52,7 +52,7 @@ public class CommandHandler
         //Check if enough balance
         if (balance < command.Amount)
         {
-            throw new Exception("Not enough balance to withdraw");
+            throw new Exception("Insufficient funds!");
         }
 
         //Publish the event

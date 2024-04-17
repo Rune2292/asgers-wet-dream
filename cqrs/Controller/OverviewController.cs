@@ -16,17 +16,17 @@ public class OverviewController : ControllerBase
     }
 
     [HttpGet("{accountNumber}")]
-    public ActionResult<ErrorMessageDto> GetBalance(string accountNumber)
+    public ActionResult<CurrentBalanceDto> GetBalance(string accountNumber)
     {
         try
         {
             int balance = _overviewModel.GetBalance(accountNumber);
 
-            return Ok(new { AccountNumber = accountNumber, Balance = balance });
+            return Ok(new CurrentBalanceDto{ CurrentBalance = balance});
         }
         catch (Exception ex)
         {
-            return BadRequest(new ErrorMessageDto { ErrorMessage = ex.Message });
+            return BadRequest(new ErrorMessageDto { Error = ex.Message });
         }
     }
 }

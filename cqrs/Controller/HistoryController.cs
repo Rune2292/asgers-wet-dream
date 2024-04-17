@@ -26,7 +26,7 @@ public class HistoryController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest(new ErrorMessageDto { ErrorMessage = ex.Message });
+            return BadRequest(new ErrorMessageDto { Error = ex.Message });
         }
     }
 
