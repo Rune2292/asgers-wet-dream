@@ -4,7 +4,7 @@ using ReadModel;
 namespace Controller;
 
 [ApiController]
-[Route("v1/query/[controller]")]
+[Route("v1/Query/[controller]")]
 public class OverviewController : ControllerBase
 {
     private readonly OverviewModel _overviewModel;
@@ -14,7 +14,7 @@ public class OverviewController : ControllerBase
         _overviewModel = overviewModel;
     }
 
-    [HttpGet("balance/{accountNumber}")]
+    [HttpGet("{accountNumber}")]
     public IActionResult GetBalance(string accountNumber)
     {
         try

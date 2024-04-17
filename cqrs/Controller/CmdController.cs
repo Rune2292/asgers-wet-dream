@@ -18,7 +18,7 @@ public class CmdController : ControllerBase
         _commandHandler = commandHandler;
     }
 
-    [HttpPost("withdraw")]
+    [HttpPost("Withdraw")]
     public IActionResult WithdrawMoneyEndpoint([FromBody] WithdrawMoney command)
     {
         try
@@ -32,7 +32,7 @@ public class CmdController : ControllerBase
         }
     }
 
-    [HttpPost("deposit")]
+    [HttpPost("Deposit")]
     public IActionResult DepositMoneyEndpoint([FromBody] DepositMoney command)
     {
         try
@@ -47,11 +47,11 @@ public class CmdController : ControllerBase
     }
 
 
-    [HttpPost("openaccount")]
+    [HttpPost("OpenAccount")]
     public IActionResult OpenAccountEndpoint()
     {
         string accountNumber = _commandHandler.HandleOpenAccount();
-        return Ok("Account with account number '" + accountNumber + "' opened succesfully!");
+        return Ok(new { AccountNumber = accountNumber });
     }
 
 

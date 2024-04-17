@@ -4,7 +4,7 @@ using ReadModel;
 namespace Controller;
 
 [ApiController]
-[Route("v1/query/[controller]")]
+[Route("v1/Query/[controller]")]
 public class HistoryController : ControllerBase
 {
     private readonly HistoryModel _historyModel;
@@ -14,13 +14,13 @@ public class HistoryController : ControllerBase
         _historyModel = historyModel;
     }
     
-    [HttpGet("history/{accountNumber}")]
+    [HttpGet("{accountNumber}")]
     public ActionResult<Transaction[]> GetHistory(string accountNumber)
     {
         try
         {
             List<Transaction> history = _historyModel.GetHistory(accountNumber);
-            
+
             return Ok(history);
         }
         catch (Exception ex)

@@ -15,26 +15,18 @@ namespace ReadModel
 
         public Dictionary<string, List<Transaction>> _history = new();
 
-        public void AddDepositEvent(string accountNumber, int amount, DateTime date)
+        public void AddAccountOpened(string accountNumber)
         {
             if (!_history.ContainsKey(accountNumber))
             {
                 _history[accountNumber] = new List<Transaction>();
             }
-
-            _history[accountNumber].Add(new Transaction(accountNumber, amount, date, "Credit"));
         }
 
-        public void AddWithdrawEvent(string accountNumber, int amount, DateTime date)
+        public void AddTransaction(string accountNumber, int amount, DateTime date, string debitCredit)
         {
-            if (!_history.ContainsKey(accountNumber))
-            {
-                _history[accountNumber] = new List<Transaction>();
-            }
-
-            _history[accountNumber].Add(new Transaction(accountNumber, amount, date, "Debit"));
+            _history[accountNumber].Add(new Transaction(accountNumber, amount, date, debitCredit));
         }
-
 
 
         public List<Transaction> GetHistory(string accountNumber)

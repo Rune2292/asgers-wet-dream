@@ -19,6 +19,11 @@ public class HistoryConsumer{
     {
         switch (evt.GetEventType())
         {
+            case "AccountOpened":
+                var AccountOpenedEvent = (Event<AccountOpenedEventData>)evt;
+                AccountOpened(AccountOpenedEvent);
+                break;
+
             case "MoneyDeposited":
                 var MoneyDepositedEvent = (Event<MoneyDepositedEventData>)evt;
                 MoneyDeposited(MoneyDepositedEvent);
@@ -32,33 +37,18 @@ public class HistoryConsumer{
         }
     }
 
+    private void AccountOpened(Event<AccountOpenedEventData> evt)
+    {
+        _historyModel.AddAccountOpened(evt.Data.AccountNumber);
+    }
+
     private void MoneyDeposited(Event<MoneyDepositedEventData> evt)
     {
-        _historyModel.AddDepositEvent(evt.Data.AccountNumber, evt.Data.Amount, evt.EventTime);
+        _historyModel.AddTransaction(evt.Data.AccountNumber, evt.Data.Amount, evt.EventTime, "Credit");
     }
 
     private void MoneyWithdrawn(Event<MoneyWithdrawnEventData> evt)
     {
-        _historyModel.AddWithdrawEvent(evt.Data.AccountNumber, evt.Data.Amount, evt.EventTime);
+        _historyModel.AddTransaction(evt.Data.AccountNumber, evt.Data.Amount, evt.EventTime, "Debit");
     }
-
-    /*
-    public void PrintHistory(string accountNumber)
-    {
-        var history = _historyModel.GetHistory(accountNumber);
-        Console.WriteLine("History for account " + accountNumber);
-        foreach (var transaction in history)
-        {
-            if (transaction.Item1 < 0)
-            {
-                Console.WriteLine("Withdrawn " + transaction + "$ at " + transaction.Item2.ToString("yyyy-MM-dd HH:mm:ss"));
-            }
-            else
-            {
-                Console.WriteLine("Deposited " + transaction + "$ at " + transaction.Item2.ToString("yyyy-MM-dd HH:mm:ss"));
-            }
-        }
-    }
-    */
-
 }

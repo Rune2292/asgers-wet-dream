@@ -19,42 +19,36 @@ namespace Consumer
         {
             switch (evt.GetEventType())
             {
+                case "AccountOpened":
+                    var AccountOpenedEvent = (Event<AccountOpenedEventData>)evt;
+                    HandleAccountOpenedEvent(AccountOpenedEvent.Data);
+                    break;
                 case "MoneyDeposited":
                     var MoneyDepositedEvent = (Event<MoneyDepositedEventData>)evt;
-                    MoneyDeposited(MoneyDepositedEvent.Data);
+                    HandleMoneyDepositedEvent(MoneyDepositedEvent.Data);
                     break;
                 case "MoneyWithdrawn":
                     var MoneyWithdrawnEvent = (Event<MoneyWithdrawnEventData>)evt;
-                    MoneyWithdrawn(MoneyWithdrawnEvent.Data);
+                    HandleMoneyWithdrawnEvent(MoneyWithdrawnEvent.Data);
                     break;
                 default:
                     break;
             }
         }
 
-
-        private void MoneyDeposited(MoneyDepositedEventData data)
+        private void HandleAccountOpenedEvent(AccountOpenedEventData data)
         {
-            try
-            {
-                _overviewModel.DepositMoney(data.AccountNumber, data.Amount);
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            _overviewModel.AccountOpened(data.AccountNumber);
         }
 
-        private void MoneyWithdrawn(MoneyWithdrawnEventData data)
+        private void HandleMoneyDepositedEvent(MoneyDepositedEventData data)
         {
-            try
-            {
-                _overviewModel.WithdrawMoney(data.AccountNumber, data.Amount);
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            _overviewModel.BalanceChanged(data.AccountNumber, data.Amount);
+        }
+
+        private void HandleMoneyWithdrawnEvent(MoneyWithdrawnEventData data)
+        {
+            _overviewModel.BalanceChanged(data.AccountNumber, -data.Amount);
         }
     }
 }
