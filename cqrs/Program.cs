@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 
-// Subscribe the consumer to the event store
+// Useless but not removing #JustInCase
 var eventStore = app.Services.GetRequiredService<EventStore>();
 var historyConsumer = app.Services.GetRequiredService<OverviewConsumer>();
 var overviewConsumer = app.Services.GetRequiredService<HistoryConsumer>();

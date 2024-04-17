@@ -6,11 +6,13 @@ namespace Consumer
     public class OverviewConsumer
     {
         private OverviewModel _overviewModel;
+        private EventStore _eventStore;
 
         public OverviewConsumer(OverviewModel overviewModel, EventStore eventStore)
         {
             _overviewModel = overviewModel;
-            eventStore.Subscribe(ConsumeEvent);
+            _eventStore = eventStore;
+            _eventStore.Subscribe(ConsumeEvent);
         }
         // Adjusted to match EventHandler<IEvent>
         public void ConsumeEvent(object sender, IEvent evt)

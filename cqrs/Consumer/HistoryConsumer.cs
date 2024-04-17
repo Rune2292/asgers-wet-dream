@@ -1,11 +1,8 @@
-
-
-
 using ReadModel;
 using Event;
-using System.Diagnostics.Tracing;
-namespace Consumer;
 
+
+namespace Consumer;
 
 public class HistoryConsumer{
         

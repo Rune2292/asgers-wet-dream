@@ -1,7 +1,5 @@
 
 
-
-
 namespace ReadModel
 {
 
