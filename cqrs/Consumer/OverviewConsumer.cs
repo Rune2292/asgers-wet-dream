@@ -44,9 +44,9 @@ namespace Consumer
         {
             try
             {
-                _overviewModel.ChangeBalance(data.AccountNumber, data.Amount);
-                Console.WriteLine("Deposited " + data.Amount + "$ to account " + data.AccountNumber);
-                PrintBalance(data.AccountNumber);
+                _overviewModel.DepositMoney(data.AccountNumber, data.Amount);
+                //Console.WriteLine("Deposited " + data.Amount + "$ to account " + data.AccountNumber);
+                //PrintBalance(data.AccountNumber);
             }
             catch (System.Exception e)
             {
@@ -58,9 +58,9 @@ namespace Consumer
         {
             try
             {
-                _overviewModel.ChangeBalance(data.AccountNumber, -data.Amount);
-                Console.WriteLine("Withdrawn " + data.Amount + "$ from account " + data.AccountNumber);
-                PrintBalance(data.AccountNumber);
+                _overviewModel.WithdrawMoney(data.AccountNumber, data.Amount);
+                //Console.WriteLine("Withdrawn " + data.Amount + "$ from account " + data.AccountNumber);
+                //PrintBalance(data.AccountNumber);
             }
             catch (System.Exception e)
             {

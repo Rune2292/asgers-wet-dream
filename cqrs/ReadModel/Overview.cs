@@ -7,20 +7,19 @@ namespace ReadModel
     {
         private Dictionary<string, int> _bankAccounts = new Dictionary<string, int>();
 
-        public void ChangeBalance(string accountNumber, int amount)
+        public void DepositMoney(string accountNumber, int amount)
         {
-            if (!_bankAccounts.ContainsKey(accountNumber))
-            {
-                _bankAccounts[accountNumber] = 0;
-            }
+            _bankAccounts[accountNumber] += amount;
+        }
 
-            if (_bankAccounts[accountNumber] + amount < 0)
+        public void WithdrawMoney(string accountNumber, int amount)
+        {
+            if (_bankAccounts[accountNumber] - amount < 0)
             {
                 throw new Exception("Not enough money");
             }
 
-            _bankAccounts[accountNumber] += amount;
-
+            _bankAccounts[accountNumber] -= amount;
         }
 
         public int GetBalance(string accountNumber)
