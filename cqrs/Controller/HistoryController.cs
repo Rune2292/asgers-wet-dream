@@ -1,11 +1,10 @@
-
-
 using Microsoft.AspNetCore.Mvc;
 using ReadModel;
 
 namespace Controller;
-    [ApiController]
-    [Route("v1/query/[controller]")]
+
+[ApiController]
+[Route("v1/query/[controller]")]
 public class HistoryController : ControllerBase
 {
     private readonly HistoryModel _historyModel;

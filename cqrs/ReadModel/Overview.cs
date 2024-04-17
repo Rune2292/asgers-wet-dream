@@ -1,35 +1,33 @@
 
 
 
-namespace ReadModel
+namespace ReadModel;
+public class OverviewModel
 {
-    public class OverviewModel
+    private Dictionary<string, int> _bankAccounts = new Dictionary<string, int>();
+
+    public void DepositMoney(string accountNumber, int amount)
     {
-        private Dictionary<string, int> _bankAccounts = new Dictionary<string, int>();
+        _bankAccounts[accountNumber] += amount;
+    }
 
-        public void DepositMoney(string accountNumber, int amount)
+    public void WithdrawMoney(string accountNumber, int amount)
+    {
+        if (_bankAccounts[accountNumber] - amount < 0)
         {
-            _bankAccounts[accountNumber] += amount;
+            throw new Exception("Not enough money");
         }
 
-        public void WithdrawMoney(string accountNumber, int amount)
-        {
-            if (_bankAccounts[accountNumber] - amount < 0)
-            {
-                throw new Exception("Not enough money");
-            }
+        _bankAccounts[accountNumber] -= amount;
+    }
 
-            _bankAccounts[accountNumber] -= amount;
+    public int GetBalance(string accountNumber)
+    {
+        if (!_bankAccounts.ContainsKey(accountNumber))
+        {
+            return -1;
         }
 
-        public int GetBalance(string accountNumber)
-        {
-            if (!_bankAccounts.ContainsKey(accountNumber))
-            {
-                return -1;
-            }
-
-            return _bankAccounts[accountNumber];
-        }
+        return _bankAccounts[accountNumber];
     }
 }

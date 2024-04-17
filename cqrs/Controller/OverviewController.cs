@@ -1,36 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
 using ReadModel;
 
-namespace Controller
+namespace Controller;
+
+[ApiController]
+[Route("v1/query/[controller]")]
+public class OverviewController : ControllerBase
 {
-    [ApiController]
-    [Route("v1/query/[controller]")]
-    public class OverviewController : ControllerBase
+    private readonly OverviewModel _overviewModel;
+
+    public OverviewController(OverviewModel overviewModel)
     {
-        private readonly OverviewModel _overviewModel;
+        _overviewModel = overviewModel;
+    }
 
-        public OverviewController(OverviewModel overviewModel)
+    [HttpGet("balance/{accountNumber}")]
+    public IActionResult GetBalance(string accountNumber)
+    {
+        try
         {
-            _overviewModel = overviewModel;
+            int balance = _overviewModel.GetBalance(accountNumber);
+            if (balance == -1)
+            {
+                return NotFound("Account not found");
+            }
+
+            return Ok(new { AccountNumber = accountNumber, Balance = balance });
         }
-
-        [HttpGet("balance/{accountNumber}")]
-        public IActionResult GetBalance(string accountNumber)
+        catch (Exception ex)
         {
-            try
-            {
-                int balance = _overviewModel.GetBalance(accountNumber);
-                if (balance == -1)
-                {
-                    return NotFound("Account not found");
-                }
-
-                return Ok(new { AccountNumber = accountNumber, Balance = balance });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"An error occured: {ex.Message}");
-            }
+            return BadRequest($"An error occured: {ex.Message}");
         }
     }
 }
