@@ -29,7 +29,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 
-// Subscribe the consumer to the event store
+// Useless but not removing #JustInCase
 var eventStore = app.Services.GetRequiredService<EventStore>();
 var consumer = app.Services.GetRequiredService<OverviewConsumer>();
 
