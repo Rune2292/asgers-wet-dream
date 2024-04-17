@@ -32,7 +32,6 @@ app.UseRouting();
 // Subscribe the consumer to the event store
 var eventStore = app.Services.GetRequiredService<EventStore>();
 var consumer = app.Services.GetRequiredService<OverviewConsumer>();
-eventStore.Subscribe(consumer.ConsumeEvent); 
 
 app.MapControllers();
 
