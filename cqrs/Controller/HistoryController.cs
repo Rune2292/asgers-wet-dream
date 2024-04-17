@@ -21,12 +21,7 @@ public class HistoryController : ControllerBase
         try
         {
             List<Transaction> history = _historyModel.GetHistory(accountNumber);
-
-            if (history.Count == 0)
-            {
-                return NotFound("Account not found");
-            }
-
+            
             return Ok(history);
         }
         catch (Exception ex)

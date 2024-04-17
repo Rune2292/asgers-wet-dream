@@ -43,7 +43,7 @@ namespace ReadModel
         {
             if (!_history.ContainsKey(accountNumber))
             {
-                return new List<Transaction>();
+                throw new Exception("Account not found");
             }
 
             return _history[accountNumber];
