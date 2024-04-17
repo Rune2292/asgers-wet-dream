@@ -7,13 +7,13 @@ public class DepositMoney
     public string? AccountNumber { get; set; }
     public void Validate()
     {
-        if (Amount <= 0)
-        {
-            throw new Exception("Amount must be greater than 0");
-        }
         if (string.IsNullOrEmpty(AccountNumber))
         {
             throw new Exception("Account number must not be empty");
+        }
+        if (Amount <= 0)
+        {
+            throw new Exception("Amount must be greater than 0");
         }
     }
 }

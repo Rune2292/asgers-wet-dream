@@ -23,6 +23,9 @@ public class CommandHandler
         //Validate the depositMoney is legal
         command.Validate();
 
+        if  (!_accountRepository.IfAccountExists(command.AccountNumber))
+            throw new Exception("Account does not exist!");
+
         //Simulate doing the deposit
         //OMG im changing the database!
 
@@ -40,12 +43,16 @@ public class CommandHandler
         //Validate the WithdrawMoney is legal
         command.Validate();
 
+        if  (!_accountRepository.IfAccountExists(command.AccountNumber))
+            throw new Exception("Account does not exist!");
         //Check if there is enough balance on the account to withdraw
         int balance = _accountRepository.CheckBalanceOnAccount(command.AccountNumber);
+
+        
         //Check if enough balance
         if (balance < command.Amount)
         {
-            throw new System.Exception("Not enough balance to withdraw");
+            throw new Exception("Not enough balance to withdraw");
         }
 
         //Publish the event
@@ -53,7 +60,6 @@ public class CommandHandler
         IEvent evt = new Event<MoneyWithdrawnEventData>("MoneyWithdrawn", evtData);
 
         _eventPublisher.PublishEvent(evt);
-
     }
 
     public string HandleOpenAccount()

@@ -1,6 +1,7 @@
 using Handler;
 using Cmd;
 using Microsoft.AspNetCore.Mvc;
+using Dto;
 
 
 namespace Controller;
@@ -19,7 +20,7 @@ public class CmdController : ControllerBase
     }
 
     [HttpPost("Withdraw")]
-    public IActionResult WithdrawMoneyEndpoint([FromBody] WithdrawMoney command)
+    public ActionResult<ErrorMessageDto> WithdrawMoneyEndpoint([FromBody] WithdrawMoney command)
     {
         try
         {
@@ -28,12 +29,12 @@ public class CmdController : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest(e.Message);
+            return BadRequest(new ErrorMessageDto {Message = e.Message });
         }
     }
 
     [HttpPost("Deposit")]
-    public IActionResult DepositMoneyEndpoint([FromBody] DepositMoney command)
+    public ActionResult<ErrorMessageDto> DepositMoneyEndpoint([FromBody] DepositMoney command)
     {
         try
         {
@@ -42,18 +43,15 @@ public class CmdController : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest(e.Message);
+            return BadRequest(new ErrorMessageDto {Message = e.Message });
         }
     }
 
 
     [HttpPost("OpenAccount")]
-    public IActionResult OpenAccountEndpoint()
+    public ActionResult<OpenAccountDto> OpenAccountEndpoint()
     {
         string accountNumber = _commandHandler.HandleOpenAccount();
-        return Ok(new { AccountNumber = accountNumber });
+        return Ok(new OpenAccountDto{ AccountNumber = accountNumber });
     }
-
-
-
 }
