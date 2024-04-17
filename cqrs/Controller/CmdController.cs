@@ -48,8 +48,8 @@ namespace Controller
         [HttpPost("openaccount")]
         public IActionResult OpenAccountEndpoint()
         {
-            _commandHandler.HandleOpenAccount();
-            return Ok("Account opened successfully!");
+            string accountNumber = _commandHandler.HandleOpenAccount();
+            return Ok("Account with account number '" + accountNumber + "' opened succesfully!");
         }
 
 

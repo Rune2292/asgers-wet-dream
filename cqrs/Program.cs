@@ -17,6 +17,10 @@ builder.Services.AddSingleton<EventStore>();
 builder.Services.AddScoped<AccountRepository>();
 builder.Services.AddSingleton<OverviewModel>();
 builder.Services.AddSingleton<OverviewConsumer>();
+builder.Services.AddSingleton<HistoryModel>();
+builder.Services.AddSingleton<HistoryConsumer>();
+
+
 
 var app = builder.Build();
 
@@ -31,8 +35,8 @@ app.UseRouting();
 
 // Subscribe the consumer to the event store
 var eventStore = app.Services.GetRequiredService<EventStore>();
-var consumer = app.Services.GetRequiredService<OverviewConsumer>();
-eventStore.Subscribe(consumer.ConsumeEvent); 
+var historyConsumer = app.Services.GetRequiredService<OverviewConsumer>();
+var overviewConsumer = app.Services.GetRequiredService<HistoryConsumer>();
 
 app.MapControllers();
 

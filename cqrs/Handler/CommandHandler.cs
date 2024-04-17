@@ -56,7 +56,7 @@ public class CommandHandler
 
     }
 
-    public void HandleOpenAccount()
+    public string HandleOpenAccount()
     {
         string randomAccountNumber;
         //Check if the account already exists
@@ -71,6 +71,8 @@ public class CommandHandler
         IEvent evt = new Event<AccountOpenedEventData>("AccountOpened", evtData);
 
         _eventPublisher.PublishEvent(evt);
+
+        return randomAccountNumber;
 
     }
 }

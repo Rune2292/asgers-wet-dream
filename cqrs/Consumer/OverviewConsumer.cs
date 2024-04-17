@@ -30,23 +30,12 @@ namespace Consumer
             }
         }
 
-        public void PrintBalance(string accountNumber)
-        {
-            if (_overviewModel.GetBalance(accountNumber) == -1)
-            {
-                Console.WriteLine("Account not found");
-                return;
-            }
-            Console.WriteLine("Account " + accountNumber + " Has " + _overviewModel.GetBalance(accountNumber) + "$");
-        }
 
         private void MoneyDeposited(MoneyDepositedEventData data)
         {
             try
             {
                 _overviewModel.DepositMoney(data.AccountNumber, data.Amount);
-                //Console.WriteLine("Deposited " + data.Amount + "$ to account " + data.AccountNumber);
-                //PrintBalance(data.AccountNumber);
             }
             catch (System.Exception e)
             {
@@ -59,8 +48,6 @@ namespace Consumer
             try
             {
                 _overviewModel.WithdrawMoney(data.AccountNumber, data.Amount);
-                //Console.WriteLine("Withdrawn " + data.Amount + "$ from account " + data.AccountNumber);
-                //PrintBalance(data.AccountNumber);
             }
             catch (System.Exception e)
             {

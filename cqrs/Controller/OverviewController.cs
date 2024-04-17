@@ -20,10 +20,6 @@ namespace Controller
             try
             {
                 int balance = _overviewModel.GetBalance(accountNumber);
-                if (balance == -1)
-                {
-                    return NotFound("Account not found");
-                }
 
                 return Ok(new { AccountNumber = accountNumber, Balance = balance });
             }

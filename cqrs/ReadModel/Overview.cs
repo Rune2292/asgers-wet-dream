@@ -26,7 +26,7 @@ namespace ReadModel
         {
             if (!_bankAccounts.ContainsKey(accountNumber))
             {
-                return -1;
+                throw new Exception("Account not found");
             }
 
             return _bankAccounts[accountNumber];
