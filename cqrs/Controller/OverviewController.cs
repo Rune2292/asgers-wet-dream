@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ReadModel;
+using Dto;
 
 namespace Controller;
 
@@ -15,7 +16,7 @@ public class OverviewController : ControllerBase
     }
 
     [HttpGet("{accountNumber}")]
-    public IActionResult GetBalance(string accountNumber)
+    public ActionResult<ErrorMessageDto> GetBalance(string accountNumber)
     {
         try
         {
@@ -25,7 +26,7 @@ public class OverviewController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"An error occured: {ex.Message}");
+            return BadRequest(new ErrorMessageDto { ErrorMessage = ex.Message });
         }
     }
 }

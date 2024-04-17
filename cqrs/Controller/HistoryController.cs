@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ReadModel;
+using Dto;
 
 namespace Controller;
 
@@ -25,7 +26,7 @@ public class HistoryController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest($"An error occured: {ex.Message}");
+            return BadRequest(new ErrorMessageDto { ErrorMessage = ex.Message });
         }
     }
 
