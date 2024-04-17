@@ -39,7 +39,7 @@ namespace Consumer
             {
                 _overviewModel.DepositMoney(data.AccountNumber, data.Amount);
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
@@ -51,7 +51,7 @@ namespace Consumer
             {
                 _overviewModel.WithdrawMoney(data.AccountNumber, data.Amount);
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
