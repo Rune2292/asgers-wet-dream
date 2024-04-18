@@ -8,13 +8,13 @@ namespace Handler;
 public class CommandHandler
 {
 
-    private readonly EventStore _eventPublisher;
+    private readonly EventBroker _eventBroker;
 
     private readonly AccountRepository _accountRepository;
 
-    public CommandHandler(EventStore eventPublisher, AccountRepository accountRepository)
+    public CommandHandler(EventBroker eventBroker, AccountRepository accountRepository)
     {
-        _eventPublisher = eventPublisher;
+        _eventBroker = eventBroker;
         _accountRepository = accountRepository;
     }
 
@@ -33,7 +33,10 @@ public class CommandHandler
         var evtData = new MoneyDepositedEventData(command.Amount, command.AccountNumber);
         IEvent evt = new Event<MoneyDepositedEventData>("MoneyDeposited", evtData);
 
-        _eventPublisher.PublishEvent(evt);
+
+
+        _eventBroker.PublishEvent(evt);
+        _accountRepository.SaveEvent(evt);
 
     }
 
@@ -59,7 +62,9 @@ public class CommandHandler
         var evtData = new MoneyWithdrawnEventData(command.Amount, command.AccountNumber);
         IEvent evt = new Event<MoneyWithdrawnEventData>("MoneyWithdrawn", evtData);
 
-        _eventPublisher.PublishEvent(evt);
+        _eventBroker.PublishEvent(evt);
+        
+        _accountRepository.SaveEvent(evt);
     }
 
     public string HandleOpenAccount()
@@ -76,7 +81,9 @@ public class CommandHandler
         var evtData = new AccountOpenedEventData(randomAccountNumber);
         IEvent evt = new Event<AccountOpenedEventData>("AccountOpened", evtData);
 
-        _eventPublisher.PublishEvent(evt);
+        _eventBroker.PublishEvent(evt);
+        
+        _accountRepository.SaveEvent(evt);
 
         return randomAccountNumber;
 

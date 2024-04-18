@@ -19,6 +19,7 @@ builder.Services.AddSingleton<OverviewModel>();
 builder.Services.AddSingleton<OverviewConsumer>();
 builder.Services.AddSingleton<HistoryModel>();
 builder.Services.AddSingleton<HistoryConsumer>();
+builder.Services.AddSingleton<EventBroker>();
 
 
 
@@ -34,7 +35,7 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 
 // Useless but not removing #JustInCase
-var eventStore = app.Services.GetRequiredService<EventStore>();
+var eventStore = app.Services.GetRequiredService<EventBroker>();
 var historyConsumer = app.Services.GetRequiredService<OverviewConsumer>();
 var overviewConsumer = app.Services.GetRequiredService<HistoryConsumer>();
 

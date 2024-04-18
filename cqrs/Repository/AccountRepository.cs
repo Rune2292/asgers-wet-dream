@@ -80,5 +80,11 @@ public class AccountRepository
         return balance;
     }
 
+    public void SaveEvent(IEvent evt)
+    {
+        _eventStore.SaveEvent(evt);
+    }
+
+
 
 }

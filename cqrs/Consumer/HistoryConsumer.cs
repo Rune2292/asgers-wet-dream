@@ -9,10 +9,10 @@ public class HistoryConsumer{
     private HistoryModel _historyModel;
 
 
-    public HistoryConsumer(HistoryModel historyModel, EventStore eventStore)
+    public HistoryConsumer(HistoryModel historyModel, EventBroker eventBroker)
     {
         _historyModel = historyModel;
-        eventStore.Subscribe(ConsumeEvent);
+        eventBroker.Subscribe(ConsumeEvent);
     }
 
     public void ConsumeEvent(object sender, IEvent evt)

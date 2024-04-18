@@ -7,12 +7,12 @@ namespace Consumer
     public class OverviewConsumer
     {
         private OverviewModel _overviewModel;
-        private EventStore _eventStore;
-        public OverviewConsumer(OverviewModel overviewModel, EventStore eventStore)
+        private EventBroker _eventBroker;
+        public OverviewConsumer(OverviewModel overviewModel, EventBroker eventBroker)
         {
             _overviewModel = overviewModel;
-            _eventStore = eventStore;
-            _eventStore.Subscribe(ConsumeEvent);
+            _eventBroker = eventBroker;
+            _eventBroker.Subscribe(ConsumeEvent);
         }
         // Adjusted to match EventHandler<IEvent>
         public void ConsumeEvent(object sender, IEvent evt)
